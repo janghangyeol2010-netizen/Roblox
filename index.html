@@ -1,128 +1,264 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>KoreanBrainGroup - Roblox</title>
-    
-    <link rel="stylesheet" href="https://css.rbxcdn.com/56f6868ec13cefb471ad86176c7b9642571d05082c86ac6300ddfeb028617d4e.css">
-    <link rel="stylesheet" href="https://css.rbxcdn.com/c065e7b41147590230d3aa4305b8cc656780f5e0fdb347d6e97cd916f7f42b16-StyleGuide.css">
-    <link rel="stylesheet" href="https://css.rbxcdn.com/03a5c1b93d8909e738d129f5ccafb1d522231b3a03b0a30fc30ed5338a5562ba-Navigation.css">
-    <link rel="stylesheet" href="https://css.rbxcdn.com/9cf73d509a97a9aadb83954af92f8ed69a74d3a9b75f08f0c353301822d0aaa6-GroupDetails.css">
-
+    <title>KoreanBrainGroup - Roblox Clone</title>
     <style>
-        /* [두 번째 사진] 로그인 화면 - 사용자님이 확인하신 그 다크모드 디자인 */
-        #login-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: #191b1d; z-index: 100000; color: #ffffff;
-            font-family: 'Source Sans Pro', sans-serif;
+        /* 이미지에서 추출한 정밀 색상 값 */
+        :root {
+            --rbx-bg: #F2F4F5;          /* 전체 배경 */
+            --rbx-white: #FFFFFF;       /* 카드 및 네비 배경 */
+            --rbx-border: #DEE1E3;      /* 경계선 */
+            --rbx-blue: #0074FF;        /* 버튼 및 링크 블루 */
+            --text-black: #393B3D;      /* 메인 글자색 */
+            --text-gray: #666666;       /* 보조 글자색 */
+            --shout-bg: #F5F6F7;        /* 샤우트 박스 배경 */
         }
-        .login-box {
-            width: 90%; max-width: 400px; margin: 15% auto;
-            background: #2b2d2f; padding: 40px 30px; border-radius: 8px; text-align: center;
+
+        body {
+            background-color: var(--rbx-bg);
+            margin: 0;
+            padding: 0;
+            /* 이미지와 동일한 폰트 느낌을 위해 맑은 고딕/Segoe UI 설정 */
+            font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
+            color: var(--text-black);
+            -webkit-font-smoothing: antialiased;
         }
-        .login-input {
-            width: 100%; height: 48px; background: #393b3d; border: 1px solid #454749;
-            border-radius: 4px; color: #ffffff; margin-bottom: 12px; padding: 0 15px; font-size: 16px; box-sizing: border-box;
+
+        /* 1. 상단 네비게이션 (이미지의 비율 그대로 구현) */
+        .header {
+            background-color: var(--rbx-white);
+            height: 40px;
+            border-bottom: 1px solid var(--rbx-border);
+            display: flex;
+            align-items: center;
+            padding: 0 50px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
         }
-        .login-btn-submit {
-            width: 100%; height: 44px; background: transparent; border: 1px solid #ffffff;
-            color: #ffffff; border-radius: 4px; font-weight: 700; cursor: pointer; margin-top: 10px;
+
+        .header-inner {
+            width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .search-container {
+            background: #F2F4F5;
+            border: 1px solid #CED4DA;
+            border-radius: 4px;
+            padding: 4px 10px;
+            width: 250px;
+            color: #ADB5BD;
+        }
+
+        /* 2. 메인 컨테이너 (스크롤 유도를 위해 높게 설정) */
+        .main-wrapper {
+            width: 1000px;
+            margin: 60px auto 100px; /* 상단바 여백 포함 */
+            min-height: 2000px; /* 강제 스크롤 생성 */
+        }
+
+        .content-card {
+            background-color: var(--rbx-white);
+            border: 1px solid var(--rbx-border);
+            padding: 35px 40px;
+        }
+
+        h2.page-title {
+            font-size: 32px;
+            font-weight: 400;
+            margin: 0 0 25px 0;
+        }
+
+        /* 3. 그룹 헤더 영역 (이미지 배치 100% 동일화) */
+        .group-header {
+            display: flex;
+            gap: 30px;
+        }
+
+        .group-logo {
+            width: 150px;
+            height: 150px;
+            border: 1px solid var(--rbx-border);
+            border-radius: 8px;
+            background: url('https://tr.rbxcdn.com/39a66d6259f9725f3f38c3501f807804/150/150/Avatar/Png') center/cover;
+        }
+
+        .group-meta h1 {
+            font-size: 28px;
+            margin: 0 0 5px 0;
+        }
+
+        .member-pill {
+            background: #E8EAEB;
+            border-radius: 12px;
+            padding: 3px 12px;
+            font-size: 12px;
+            color: var(--text-gray);
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        .join-btn-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-blue {
+            background-color: var(--rbx-blue);
+            color: white;
+            padding: 10px 70px;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* 4. 탭 메뉴 (선 두께 및 위치 일치) */
+        .tabs {
+            margin-top: 40px;
+            border-bottom: 2px solid #F2F4F5;
+            display: flex;
+        }
+
+        .tab {
+            padding: 12px 35px;
+            font-weight: bold;
+            color: var(--text-gray);
+            cursor: pointer;
+        }
+
+        .tab.active {
+            color: var(--text-black);
+            background-color: #393B3D;
+            color: white;
+            border-radius: 4px 4px 0 0;
+        }
+
+        /* 5. 샤우트 및 멤버 그리드 */
+        .section-label { font-size: 18px; margin: 30px 0 15px 0; }
+        
+        .shout-box {
+            background-color: var(--shout-bg);
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            border: 1px solid #E8EAEB;
+        }
+
+        .avatar-circle { width: 50px; height: 50px; border-radius: 50%; background: #DDD; }
+
+        .member-grid {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr); /* 이미지와 똑같이 9개 배치 */
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .member-item { text-align: center; font-size: 11px; }
+        .member-item img { width: 100%; border-radius: 50%; background: #F2F4F5; margin-bottom: 5px; }
+
+        /* 6. 푸터 */
+        .footer {
+            margin-top: 150px;
+            padding: 60px 0;
+            background: white;
+            border-top: 1px solid var(--rbx-border);
+            text-align: center;
         }
     </style>
 </head>
-<body class="rbx-body light-theme builder-font" style="overflow-y: auto;">
-    <div id="wrap" class="wrap no-gutter-ads logged-out">
-        <header id="header" class="navbar-fixed-top rbx-header">
-            <div class="container-fluid">
-                <div class="rbx-navbar-header">
-                    <div class="navbar-header"><a class="navbar-brand"><span class="icon-logo-r"></span></a></div>
-                </div>
-                <ul class="nav rbx-navbar hidden-xs hidden-sm">
-                    <li><a class="nav-menu-title" href="#">Charts</a></li>
-                    <li><a class="nav-menu-title" href="#">Marketplace</a></li>
-                    <li><a class="nav-menu-title" href="#">Create</a></li>
-                    <li><a class="nav-menu-title" href="#">Robux</a></li>
-                </ul>
+<body>
+
+    <header class="header">
+        <div class="header-inner">
+            <div style="font-size: 24px;">■</div>
+            <span>Charts</span> <span>Marketplace</span> <span>Create</span> <span>Robux</span>
+            <div class="search-container">🔍 Search</div>
+            <div style="margin-left: auto; display: flex; gap: 10px;">
+                <button style="background: var(--rbx-blue); color:white; border:none; padding:5px 15px; border-radius:4px;">Sign Up</button>
+                <button style="background: white; border:1px solid #CCC; padding:5px 15px; border-radius:4px;">Log In</button>
             </div>
-        </header>
+        </div>
+    </header>
 
-        <nav id="navigation" class="rbx-left-col">
-            <ul>
-                <li class="active"><a class="nav-item"><span class="icon-nav-home"></span><span class="font-header-2">Home</span></a></li>
-                <li><a class="nav-item"><span class="icon-nav-profile"></span><span class="font-header-2">Profile</span></a></li>
-                <li><a class="nav-item"><span class="icon-nav-message"></span><span class="font-header-2">Messages</span></a></li>
-                <li><a class="nav-item"><span class="icon-nav-friends"></span><span class="font-header-2">Friends</span></a></li>
-            </ul>
-        </nav>
-        <main class="container-main content">
-            <div id="container-main">
-                <div class="group-details-container">
-                    <div class="section-content">
-                        <div class="group-header">
-                            <div class="group-header-image">
-                                <img src="https://tr.rbxcdn.com/180DAY-4a5cef5da6aa52692439ad69a06e15e5/150/150/Image/Png/noFilter" style="width:150px; border-radius:50%; border:1px solid #dee1e3;">
-                            </div>
-                            <div class="group-caption">
-                                <h1 class="group-name">KoreanBrainGroup</h1>
-                                <div class="group-owner">By <a class="text-name" href="#">Etik4321</a></div>
-                                <div class="group-stats">
-                                    <span class="font-caption-header">57 Members</span>
-                                </div>
-                                <div class="group-membership-container" style="margin-top: 20px;">
-                                    <button onclick="openLogin()" class="btn-growth-md btn-secondary-md">Join Group</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="rbx-tabs-horizontal">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a>About</a></li>
-                            <li><a>Store</a></li>
-                            <li><a>Affiliates</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="section-content">
-                                <h3 class="container-header">Description</h3>
-                                <pre style="border:none; background:none; font-family:inherit; white-space:pre-wrap; font-size:14px; color:#444;">KoreanBrainGroup is a group on Roblox owned by Etik4321 with 57 members. 법적 증거로 사용</pre>
-                            </div>
-                        </div>
+    <div class="main-wrapper">
+        <div class="content-card">
+            <h2 class="page-title">Communities</h2>
+            
+            <div class="group-header">
+                <div class="group-logo"></div>
+                <div class="group-meta">
+                    <h1>KoreanBrainGroup</h1>
+                    <div style="font-size:14px;">By <span style="color:var(--rbx-blue)">Etik4321</span></div>
+                    <div class="member-pill">57 members</div>
+                    <p style="font-size:14px; margin:10px 0;">법적 증거로 사용 <br> <span style="color:var(--rbx-blue); font-weight:bold;">more</span></p>
+                    <div class="join-btn-container">
+                        <button class="btn-blue">Join Community</button>
+                        <button style="background:#EEE; border:none; padding:10px 15px; border-radius:4px;">···</button>
                     </div>
                 </div>
             </div>
-        </main>
+
+            <div class="tabs">
+                <div class="tab">About</div>
+                <div class="tab active">About</div>
+                <div class="tab">Store</div>
+                <div class="tab">Affiliates</div>
+            </div>
+
+            <div class="section-label">Shout</div>
+            <div class="shout-box">
+                <div class="avatar-circle"></div>
+                <div>
+                    <div style="font-weight:bold; font-size:14px;">Etik4321</div>
+                    <div style="font-size:14px;">신 드웹에다 사용됩니다</div>
+                    <div style="font-size:12px; color:#999; margin-top:5px;">Nov 10, 2024 | 12:54 AM</div>
+                </div>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+                <div class="section-label">Members</div>
+                <div style="font-size:14px; color:#666; margin-bottom:15px;">&lt; Page 1 &gt;</div>
+            </div>
+            
+            <div class="member-grid" id="memberGrid">
+                </div>
+        </div>
     </div>
 
-    <div id="login-overlay">
-        <div style="height: 44px; background: #000; display: flex; align-items: center; padding: 0 20px;">
-            <span style="font-size: 24px; cursor: pointer;" onclick="location.reload()">×</span>
+    <footer class="footer">
+        <div style="display:flex; justify-content:center; gap:25px; color:#666; font-size:14px; margin-bottom:20px;">
+            <span>About Us</span><span>Jobs</span><span>Blog</span><span>Parents</span><span>Help</span><span>Terms</span><span>Privacy</span>
         </div>
-        <div class="login-box">
-            <h1 style="font-size: 32px; margin-bottom: 30px; font-weight: 700;">Login to Roblox</h1>
-            <input type="text" id="u" class="login-input" placeholder="Username/Email/Phone">
-            <input type="password" id="p" class="login-input" placeholder="Password">
-            <button class="login-btn-submit" onclick="submitData()">Log In</button>
-            <div style="margin-top: 25px; color: #adb0b1; font-size: 14px;">
-                <p>Forgot Password or Username?</p>
-                <div style="border-top: 1px solid #454749; margin: 20px 0;"></div>
-                <button style="width:100%; height:44px; background:#393b3d; border:none; color:#fff; border-radius:4px; font-weight:700;">Quick Sign-in</button>
-            </div>
-        </div>
-    </div>
+        <p style="font-size:11px; color:#999; line-height:1.6;">
+            ©2026 Roblox Corporation. Roblox, the Roblox logo and Powering Imagination are among our registered and unregistered trademarks in the U.S. and other countries.
+        </p>
+    </footer>
 
     <script>
-        function openLogin() {
-            document.getElementById('wrap').style.display = 'none';
-            document.getElementById('login-overlay').style.display = 'block';
-            window.scrollTo(0,0);
-        }
-        function submitData() {
-            if(document.getElementById('u').value && document.getElementById('p').value) {
-                alert("연결 오류: 서버 응답이 없습니다.");
-                location.reload();
-            }
-        }
+        const members = ["miauguai981", "00_VOID", "MR_GABUT235", "hunter", "Trevor", "Qba345", "izz_mila", "rijw", "arisf_34507"];
+        const grid = document.getElementById('memberGrid');
+        members.forEach(name => {
+            grid.innerHTML += `
+                <div class="member-item">
+                    <img src="https://tr.rbxcdn.com/30day-77085785006b5d929966453965568571/150/150/AvatarHeadshot/Png">
+                    <div>${name}</div>
+                </div>
+            `;
+        });
     </script>
 </body>
 </html>
