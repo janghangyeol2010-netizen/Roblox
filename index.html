@@ -3,134 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <title>KoreanBrainGroup - Roblox</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        /* 로블록스 실제 폰트 및 자간 100% 재현 */
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
-
         :root {
-            --bg: #F2F4F5;
-            --white: #FFFFFF;
-            --blue: #0074FF;
-            --text: #393B3D;
-            --border: #DEE1E3;
+            --rbx-bg: #F2F4F5;
+            --rbx-nav-bg: #FFFFFF;
+            --rbx-blue: #0074FF;
+            --rbx-border: #DEE1E3;
+            --text-main: #393B3D;
         }
 
         body, html {
             margin: 0; padding: 0;
-            background-color: var(--bg);
-            /* 폰트 렌더링을 실제와 동일하게 픽셀 조정 */
-            font-family: "Gotham SSm A", "Gotham SSm B", "Roboto", sans-serif;
+            background-color: var(--rbx-bg);
+            font-family: 'Montserrat', 'Segoe UI', sans-serif;
             -webkit-font-smoothing: antialiased;
-            letter-spacing: -0.015em;
+            letter-spacing: -0.03em;
+            color: var(--text-main);
         }
 
-        .scroll-container { min-height: 2500px; } /* 강제 스크롤 */
-
-        /* 좌측 상단 로고 포함 네비바 */
+        /* [상단 네비게이션 바 - 픽셀 퍼펙트] */
         .navbar {
             height: 40px;
-            background: var(--white);
-            border-bottom: 1px solid var(--border);
-            display: flex; align-items: center;
-            padding: 0 16px;
-            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background-color: var(--rbx-nav-bg);
+            border-bottom: 1px solid var(--rbx-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+            position: fixed;
+            top: 0; width: 100%; z-index: 1000;
             box-sizing: border-box;
         }
 
-        .logo-img {
-            width: 28px; height: 28px;
-            background: url('logo.png') no-repeat center/contain; /* 업로드한 파일 연결 */
-            margin-right: 20px;
+        /* 좌측: 로고 + 메뉴 */
+        .nav-left { display: flex; align-items: center; gap: 5px; }
+        .logo-box {
+            width: 30px; height: 30px;
+            background: url('logo.png') no-repeat center/contain;
+            margin-right: 15px;
+        }
+        .nav-item {
+            padding: 0 10px; font-size: 14px; font-weight: 600;
+            color: var(--text-main); cursor: pointer;
         }
 
-        .nav-text { font-size: 14.5px; font-weight: 500; display: flex; gap: 18px; }
-
-        /* 메인 컨텐츠 970px 픽셀 매칭 */
-        .wrapper { width: 970px; margin: 60px auto 0; padding: 0 10px; }
-        .card { background: var(--white); border: 1px solid var(--border); padding: 24px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
-
-        .group-header { display: flex; gap: 28px; }
-        .group-img {
-            width: 150px; height: 150px; border-radius: 8px; border: 1px solid var(--border);
-            background: url('group_icon.png') no-repeat center/cover; /* 업로드한 파일 연결 */
+        /* 중앙: 검색창 */
+        .nav-center { flex-grow: 1; max-width: 400px; margin: 0 20px; position: relative; }
+        .search-input {
+            width: 100%; height: 28px; background-color: #F2F4F5;
+            border: 1px solid #B8BABC; border-radius: 4px;
+            padding: 0 10px 0 32px; font-size: 13px;
         }
 
-        .group-title { font-size: 24px; font-weight: 700; margin: 0 0 4px 0; }
-        .owner { font-size: 14px; color: #666; margin-bottom: 12px; }
-        .owner a { color: var(--blue); text-decoration: none; font-weight: 500; }
-        .badge { display: inline-block; background: #E8EAEB; font-size: 12px; padding: 2px 10px; border-radius: 12px; margin-bottom: 16px; }
+        /* 우측: Sign Up / Log In 버튼 (여기가 핵심) */
+        .nav-right { display: flex; align-items: center; gap: 8px; }
+        .btn-base {
+            height: 28px; padding: 0 16px; font-size: 13px; font-weight: 700;
+            border-radius: 4px; cursor: pointer; display: flex; align-items: center;
+            transition: opacity 0.2s;
+        }
+        .btn-signup {
+            background-color: var(--rbx-blue); color: #FFFFFF; border: none;
+        }
+        .btn-login {
+            background-color: transparent; color: var(--text-main);
+            border: 1px solid #B8BABC;
+        }
 
-        .btn-blue { background: var(--blue); color: #fff; padding: 10px 65px; border: none; border-radius: 4px; font-size: 16px; font-weight: 700; cursor: pointer; }
+        /* [메인 컨텐츠] */
+        .wrapper { width: 970px; margin: 60px auto 100px; padding: 0 10px; }
+        .card { background: #FFFFFF; border: 1px solid var(--rbx-border); padding: 24px; }
+        
+        .group-header { display: flex; gap: 25px; }
+        .group-img { width: 150px; height: 150px; border: 1px solid var(--rbx-border); border-radius: 8px; background: url('group_icon.png') center/cover; }
+        .group-title { font-size: 24px; font-weight: 800; margin: 0; }
+        .badge { background: #E8EAEB; display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 12px; margin: 12px 0; color: #666; }
+        .btn-blue-main { background: var(--rbx-blue); color: #fff; border: none; padding: 10px 60px; border-radius: 4px; font-weight: 700; font-size: 16px; cursor: pointer; }
 
-        /* 탭 및 그리드 */
-        .tab-bar { display: flex; margin-top: 35px; border-bottom: 1px solid var(--border); }
-        .tab { padding: 12px 30px; font-size: 16px; font-weight: 700; color: #666; }
-        .tab.active { color: var(--text); border-bottom: 4px solid var(--text); margin-bottom: -1px; }
+        .tab-bar { display: flex; margin-top: 35px; border-bottom: 1px solid var(--rbx-border); }
+        .tab { padding: 12px 30px; font-size: 16px; font-weight: 700; color: #666; cursor: pointer; }
+        .tab.active { color: var(--text-main); border-bottom: 4px solid var(--text-main); margin-bottom: -1px; }
 
-        .m-grid { display: grid; grid-template-columns: repeat(9, 1fr); gap: 14px; margin-top: 20px; }
+        .m-grid { display: grid; grid-template-columns: repeat(9, 1fr); gap: 14px; margin-top: 25px; }
         .m-card { text-align: center; }
-        .m-card img { width: 100%; border-radius: 50%; background: var(--bg); margin-bottom: 6px; }
-        .m-name { font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text); }
-
-        .footer { margin-top: 150px; padding: 60px 0; background: #fff; border-top: 1px solid var(--border); text-align: center; }
+        .m-card img { width: 100%; border-radius: 50%; background: var(--rbx-bg); }
+        .m-name { font-size: 11px; font-weight: 600; margin-top: 5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     </style>
 </head>
 <body>
-    <div class="scroll-container">
-        <nav class="navbar">
-            <div class="logo-img"></div>
-            <div class="nav-text"><span>Charts</span><span>Marketplace</span><span>Create</span><span>Robux</span></div>
-        </nav>
 
-        <main class="wrapper">
-            <h2 style="font-size: 30px; font-weight: 300; margin-bottom: 18px;">Communities</h2>
-            <div class="card">
-                <div class="group-header">
-                    <div class="group-img"></div>
-                    <div class="group-info">
-                        <h1 class="group-title">KoreanBrainGroup</h1>
-                        <div class="owner">By <a href="#">Etik4321</a></div>
-                        <div class="badge">57 members</div>
-                        <p style="font-size: 14px; line-height: 1.5;">법적 증거로 사용 <br> <span style="color:var(--blue); font-weight:500;">more</span></p>
-                        <button class="btn-blue">Join Community</button>
-                    </div>
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="logo-box"></div>
+            <div class="nav-item">Charts</div>
+            <div class="nav-item">Marketplace</div>
+            <div class="nav-item">Create</div>
+            <div class="nav-item">Robux</div>
+        </div>
+        
+        <div class="nav-center">
+            <input type="text" class="search-input" placeholder="Search">
+        </div>
+
+        <div class="nav-right">
+            <button class="btn-base btn-signup">Sign Up</button>
+            <button class="btn-base btn-login">Log In</button>
+        </div>
+    </nav>
+
+    <div class="wrapper">
+        <h2 style="font-size: 30px; font-weight: 300; margin-bottom: 20px;">Communities</h2>
+        <div class="card">
+            <div class="group-header">
+                <div class="group-img"></div>
+                <div>
+                    <h1 class="group-title">KoreanBrainGroup</h1>
+                    <div style="font-size:14px; margin-top:5px;">By <span style="color:var(--rbx-blue); font-weight:600;">Etik4321</span></div>
+                    <div class="badge">57 members</div>
+                    <p style="font-size:14px;">법적 증거로 사용<br><span style="color:var(--rbx-blue); font-weight:600;">more</span></p>
+                    <button class="btn-blue-main">Join Community</button>
                 </div>
-
-                <div class="tab-bar">
-                    <div class="tab">About</div>
-                    <div class="tab active">About</div>
-                    <div class="tab">Store</div>
-                    <div class="tab">Affiliates</div>
-                </div>
-
-                <h3 style="font-size: 18px; margin: 30px 0 15px;">Shout</h3>
-                <div style="background: #F5F6F7; padding: 16px; display: flex; gap: 15px; border: 1px solid #E8EAEB;">
-                    <img src="member.png" width="48" height="48" style="border-radius:50%">
-                    <div>
-                        <div style="font-weight:700; font-size:14px;">Etik4321</div>
-                        <div style="font-size:14px;">신 드웹에다 사용됩니다</div>
-                        <div style="font-size:12px; color:#ADB1B5;">Nov 10, 2024 | 12:54 AM</div>
-                    </div>
-                </div>
-
-                <h3 style="font-size: 18px; margin: 35px 0 15px;">Members</h3>
-                <div class="m-grid" id="grid"></div>
             </div>
-        </main>
-
-        <footer class="footer">
-            <div style="display:flex; justify-content:center; gap:25px; font-size:14px; color:#666; margin-bottom:20px;">
-                <span>About Us</span><span>Jobs</span><span>Blog</span><span>Parents</span><span>Help</span><span>Terms</span><span>Privacy</span>
+            <div class="tab-bar">
+                <div class="tab">About</div>
+                <div class="tab active">About</div>
+                <div class="tab">Store</div>
+                <div class="tab">Affiliates</div>
             </div>
-            <p style="font-size: 12px; color: #999;">©2026 Roblox Corporation. Roblox, the Roblox logo and Powering Imagination are among our registered and unregistered trademarks.</p>
-        </footer>
+            <div class="m-grid" id="mGrid"></div>
+        </div>
     </div>
 
     <script>
         const members = ["miauguai981", "00_VOID", "MR_GABUT235", "hunter", "Trevor", "Qba345", "izz_mila", "rijw", "arisf_34507"];
-        const g = document.getElementById('grid');
+        const grid = document.getElementById('mGrid');
         members.forEach(m => {
-            g.innerHTML += `<div class="m-card"><img src="member.png"><div class="m-name">${m}</div></div>`;
+            grid.innerHTML += `<div class="m-card"><img src="member.png"><div class="m-name">${m}</div></div>`;
         });
     </script>
 </body>
