@@ -1,241 +1,163 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <title>KoreanBrainGroup</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <title>Community Profile</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f6;
+            margin: 0;
+            padding: 20px;
+        }
 
-    body {
-      margin: 0;
-      background-color: #ffffff;
-      color: #111;
-    }
+        /* 메인 컨테이너 */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
 
-    /* ===== 상단 네비게이션 ===== */
-    header {
-      height: 56px;
-      display: flex;
-      align-items: center;
-      padding: 0 20px;
-      border-bottom: 1px solid #ddd;
-      gap: 20px;
-    }
+        /* 상단 프로필 영역 */
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 30px;
+            border-bottom: 1px solid #eee;
+        }
 
-    header .logo {
-      font-weight: bold;
-      font-size: 20px;
-    }
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #ffd700, #00c6ff);
+            border-radius: 15px; /* 로블록스 특유의 둥근 사각형 */
+            margin-right: 25px;
+        }
 
-    header nav {
-      display: flex;
-      gap: 16px;
-      color: #555;
-      font-size: 14px;
-    }
+        .profile-info {
+            flex-grow: 1;
+        }
 
-    header .search {
-      flex: 1;
-    }
+        .profile-info h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #333;
+        }
 
-    header input {
-      width: 100%;
-      padding: 8px 12px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
+        .profile-info p {
+            margin: 5px 0;
+            color: #666;
+            font-size: 16px;
+        }
 
-    header .auth button {
-      padding: 8px 14px;
-      border-radius: 6px;
-      border: none;
-      cursor: pointer;
-    }
+        /* 가입 버튼 */
+        .join-btn {
+            background-color: #3f73f6;
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
 
-    .signup {
-      background: #2563eb;
-      color: white;
-    }
+        .join-btn:hover {
+            background-color: #2e5bc9;
+        }
 
-    .login {
-      background: #eee;
-      margin-left: 8px;
-    }
+        /* 탭 메뉴 (About, Store, Affiliates) */
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #eee;
+        }
 
-    /* ===== 메인 컨텐츠 ===== */
-    .container {
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 15px 0;
+            font-weight: bold;
+            color: #777;
+            cursor: pointer;
+        }
 
-    .community-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+        .tab.active {
+            color: #333;
+            border-bottom: 3px solid #333;
+        }
 
-    .community-info {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-    }
+        /* 하단 설명 섹션 */
+        .content-section {
+            padding: 25px;
+        }
 
-    .community-info img {
-      width: 96px;
-      height: 96px;
-      border-radius: 50%;
-      background: #000;
-    }
+        .author-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
 
-    .community-info h1 {
-      margin: 0;
-      font-size: 28px;
-    }
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            background: #ddd;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
 
-    .community-info span {
-      color: #666;
-      font-size: 14px;
-    }
+        .author-name {
+            font-weight: bold;
+            color: #333;
+        }
 
-    .join-btn {
-      background: #2563eb;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-size: 15px;
-      cursor: pointer;
-    }
+        .description {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            color: #444;
+            line-height: 1.6;
+            font-size: 15px;
+        }
 
-    /* ===== 탭 ===== */
-    .tabs {
-      display: flex;
-      gap: 30px;
-      margin-top: 40px;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .tab {
-      padding-bottom: 12px;
-      font-weight: 500;
-      color: #555;
-    }
-
-    .tab.active {
-      color: black;
-      border-bottom: 2px solid black;
-    }
-
-    /* ===== Shout ===== */
-    .section {
-      margin-top: 40px;
-    }
-
-    .shout-box {
-      border: 1px solid #e5e5e5;
-      border-radius: 10px;
-      padding: 20px;
-      display: flex;
-      gap: 15px;
-      background: #fafafa;
-    }
-
-    .shout-box img {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: #ccc;
-    }
-
-    .shout-content strong {
-      display: block;
-      font-size: 14px;
-    }
-
-    .shout-content p {
-      margin: 6px 0;
-      font-size: 14px;
-    }
-
-    .shout-content time {
-      font-size: 12px;
-      color: #888;
-    }
-
-    /* ===== Members ===== */
-    .members-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .members-header select {
-      padding: 6px 10px;
-      border-radius: 6px;
-    }
-  </style>
+        .date {
+            color: #999;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">■</div>
-  <nav>
-    <div>Charts</div>
-    <div>Marketplace</div>
-    <div>Create</div>
-    <div>Robux</div>
-  </nav>
-  <div class="search">
-    <input placeholder="Search" />
-  </div>
-  <div class="auth">
-    <button class="signup">Sign Up</button>
-    <button class="login">Log In</button>
-  </div>
-</header>
-
 <div class="container">
-  <div class="community-header">
-    <div class="community-info">
-      <img src="https://via.placeholder.com/96" />
-      <div>
-        <h1>KoreanBrainGroup</h1>
-        <span>By Etik4321 · 57 Members</span>
-      </div>
+    <div class="header">
+        <div class="profile-img"></div>
+        <div class="profile-info">
+            <h1>GitHub community</h1>
+            <p>By Etik4321</p>
+        </div>
+        <button class="join-btn">Join Community</button>
     </div>
-    <button class="join-btn">Join Community</button>
-  </div>
 
-  <div class="tabs">
-    <div class="tab active">About</div>
-    <div class="tab">Store</div>
-    <div class="tab">Affiliates</div>
-  </div>
-
-  <div class="section">
-    <h3>Shout</h3>
-    <div class="shout-box">
-      <img src="https://via.placeholder.com/48" />
-      <div class="shout-content">
-        <strong>Etik4321</strong>
-        <p>선 드릴때마다 사용합니다</p>
-        <time>Nov 10, 2024 | 12:14 AM</time>
-      </div>
+    <div class="tabs">
+        <div class="tab active">About</div>
+        <div class="tab">Store</div>
+        <div class="tab">Affiliates</div>
     </div>
-  </div>
 
-  <div class="section">
-    <div class="members-header">
-      <h3>Members</h3>
-      <select>
-        <option>Player ⭐</option>
-      </select>
+    <div class="content-section">
+        <div class="author-info">
+            <div class="author-avatar"></div>
+            <span class="author-name">Etik4321</span>
+        </div>
+        <div class="description">
+            홍보해주시면 등급 올려드립니다
+            <div class="date">Nov 10, 2024 | 12:14 AM</div>
+        </div>
     </div>
-  </div>
 </div>
 
 </body>
